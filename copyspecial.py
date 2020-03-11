@@ -47,17 +47,29 @@ def zip_to_file(paths, zippath):
     print("Command I'm going to do: ")
     print(command)
     os.system(command)
-    
+
 def main():
-    # This snippet will help you get started with the argparse module.
     parser = argparse.ArgumentParser()
     parser.add_argument('--todir', help='dest dir for special files')
     parser.add_argument('--tozip', help='dest zipfile for special files')
     # TODO need an argument to pick up 'from_dir'
     parser.add_argument('fromdir', help='dir to look for local files')
     args = parser.parse_args()
+    # TODO you must write your own code to get the cmdline args.
+    # Read the docs and examples for the argparse module about how to do this.
+    all_paths = get_spec_paths(args.fromdir)
+    # Parsing command line arguments is a must-have skill.
+    # This is input data validation.
+    # If something is
+    # wrong (or missing) with any
+    # required args, the general
+    # rule is to print a
+    # usage message and exit(1).
+    # with any required args, the general rule is to print a
+    # usage message and exit(1).
+    # Call your functions
     if args.todir:
-       copy_to_dir(args.todir, all_paths)
+        copy_to_dir(args.todir, all_paths)
     if args.tozip:
         zip_to_file(all_paths, os.path.join(os.getcwd(), args.tozip))
     if not args.todir and not args.tozip:
